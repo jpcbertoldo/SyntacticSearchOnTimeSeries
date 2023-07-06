@@ -9,8 +9,28 @@ from scipy import signal
 from scipy.signal import filtfilt
 from pylab import figure, plot, vlines
 
-with open('gots_dictionary.json') as data_file:
-    gots_func_dict = json.load(data_file)
+# -----------------------------------------------------
+# with open('gots_dictionary.json') as data_file:
+#     gots_func_dict = json.load(data_file)
+# -----------------------------------------------------
+# copied and pasted the content of that file to remove the path dependency
+gots_func_dict = {
+  "pre_processing": {
+    "☱": "highpass",
+    "☲": "bandpass",
+    "☴": "lowpass",
+    "~": "smooth",
+    "∥": "abs",
+    "⊚": "stat_white"
+  },
+  "connotation": {
+    "⇞": "AmpC",
+    "†": "DiffC",
+    "⇵": "ampDiffC",
+    "‡": "Diff2C",
+    "↕": "RiseAmp"
+  },
+}
 
 
 # Filtering methods
@@ -428,7 +448,7 @@ def plot_matches(s, m, scatter=False):
     if(scatter):
         [plot(i[0], s[i[0]], 'o', color='r') for i in m];
     else:
-        [vlines(i[0], np.min(s), np.max(s), lw=3) for i in m];
+        [vlines(i[0], np.min(s), np.max(s), lw=3, color='black') for i in m];
 
 
 # Main methods
